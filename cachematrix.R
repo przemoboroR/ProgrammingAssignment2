@@ -1,7 +1,9 @@
-## Put comments here that give an overall description of what your
-## functions do
+# This is only adaptation of functions makeVector and cacheMean to
+# requirements of Assignment 2. 
 
-## Write a short comment describing this function
+# makeCacheMatrix takes square invertible matrix as input and creates
+# "special" matrix - list of functions that set and get value of 
+# our matrix and set and get the value of an invers matrix
 
 makeCacheMatrix <- function(x = matrix()) {
 
@@ -19,8 +21,19 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+# cacheSolve takes as an argument special matrix created by 
+# makeCacheMatrix, chcecks if inverse matrix was computed soon
+# and unless it was, computes and return it
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+    
+    m <- x$getinverse()
+    if(!is.null(m)) {
+        message("getting cached data")
+        return(m)
+    }
+    data <- x$get()
+    m <- solve(data)
+    x$setinverse(m)
+    m
 }
